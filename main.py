@@ -1,7 +1,7 @@
 from typing import Callable, Dict
 from colorama import init
 from logo import show_logo
-
+from extract import data_extractor
 
 init(autoreset=True)
 
@@ -27,6 +27,7 @@ def main() -> None:
     # --- Loading data ---
     def load_raw_data() -> None:
         """Extracting raw data from the file"""
+        data_extractor()
         pass
     
     
