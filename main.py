@@ -1,14 +1,21 @@
 from typing import Callable, Dict
+from colorama import init
+from logo import show_logo
 
 
+init(autoreset=True)
 
 def main() -> None:
     """Program main function"""
     
+    show_logo()    
+        
+        
     # --- Menu functions ---
     def menu()-> None:
         """Show program menu"""
-        print("This is menu")
+        show_logo()  
+        print("This is menu: ")
     
         
     def program_exit() -> None:
@@ -37,11 +44,11 @@ def main() -> None:
             print("Pls give men the proper number:")
             continue
         
-        #Option execution
+        #Options execution
         if user_choice in options:
             options[user_choice]()
         else:
-            print("incorrect number")
+            print("Incorrect number")
     
         
 if __name__ == "__main__":
