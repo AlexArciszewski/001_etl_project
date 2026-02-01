@@ -20,13 +20,13 @@ def main() -> None:
         
     def program_exit() -> None:
         """Exit the program"""
-        print("Program will now exit")
+        print("Program will now exit. Have a nice day!")
         exit()
     
     # --- Program options---
     options:Dict[int, Callable[[], None]] = {
         1:menu,
-        4:program_exit,
+        5:program_exit,
     }
     
     #--- Main menu loop ---
@@ -34,7 +34,10 @@ def main() -> None:
         #Possible options
         print("\nChoose options:")
         print("1 - Menu")
-        print("4 - Exit")
+        print("2 - Extract Data")
+        print("3 - Transform Data")
+        print("4 - Load Data ")
+        print("5 - Exit")
 
         
         #User input
