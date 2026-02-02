@@ -1,16 +1,18 @@
+import pandas as pd
 from typing import Callable, Dict
 from colorama import init
 from logo import show_logo
-from extract import data_extractor
+from extract import data_extractor, choose_loader
 
 init(autoreset=True)
+
 
 def main() -> None:
     """Program main function"""
     
     show_logo()
     
-    etl_status:dict = {
+    etl_status: Dict[str, bool] = {
         "extract": False,
         "transform": False,
         "load": False
@@ -27,8 +29,16 @@ def main() -> None:
     # --- Loading data ---
     def load_raw_data() -> None:
         """Extracting raw data from the file"""
-        data_extractor()
-        pass
+        loader: str | None = choose_loader()
+        # data_extractor(loader)
+        df: pd.DataFrame | None = data_extractor(loader)
+        
+        if df is not None:
+            etl_status["extract"] = True
+            print("Data extraction completed")
+        else:
+            print("Error during extraction of a data")
+            
     
     
     # ---Transforming data ---
@@ -43,31 +53,30 @@ def main() -> None:
         pass        
     
   
-  
     # ---Exiting the program ---      
     def program_exit() -> None:
         """Exit the program"""
         print("Program will now exit. Have a nice day!")
         exit()
     
-    
+    # --- Checking programs tatus ---
     def check_status() -> None:
         """Show ETL operation status"""
         print("\n---ETL STATUS check--- ")
-        print(f"Extraction:{'Done' if etl_status["extract"] else "Waiting" }")
-        print(f"Transforming:{'Done' if etl_status["transform"] else "Waiting" }")
-        print(f"Loading:{'Done' if etl_status["load"] else "Waiting" }")
+        print(f"Extraction: {'Done' if etl_status["extract"] else "Waiting" }")
+        print(f"Transforming: {'Done' if etl_status["transform"] else "Waiting" }")
+        print(f"Loading: {'Done' if etl_status["load"] else "Waiting" }")
         print("\n")
         
     
     # --- Program options---
-    options:Dict[int, Callable[[], None]] = {
-        1:menu_loader,
-        2:load_raw_data,
-        3:data_transformer,
-        4:data_saver,
-        5:check_status,
-        6:program_exit,
+    options: Dict[int, Callable[[], None]] = {
+        1: menu_loader,
+        2: load_raw_data,
+        3: data_transformer,
+        4: data_saver,
+        5: check_status,
+        6: program_exit,
     }
     
     
