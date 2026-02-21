@@ -2,7 +2,8 @@ from colorama import init, Fore, Back, Style
 
 
 def show_logo() -> None:
-    """Creates the program logo"""        
+    """Creates the program logo""" 
+           
     logo:str = r"""
 ███████╗████████╗██╗     
 ██╔════╝╚══██╔══╝██║     

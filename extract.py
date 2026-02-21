@@ -1,9 +1,7 @@
 import pandas as pd
 
-#/media/alexander/Dane2/2_python_coding/001_etl_project/data/raw/heart-disease.csv
 
-
-def choose_loader() -> str|None:
+def choose_loader() -> str | None:
     """
     Prompt user to choose the appropriate data loader for their file type.
     
@@ -20,19 +18,23 @@ def choose_loader() -> str|None:
     user_choice:str = input("Your choice: ")
     
     if user_choice == '1':
-        loader:str = "read_csv"
+        loader = "read_csv"
+        
     elif user_choice == '2':
         loader = "read_excel"
+        
     elif user_choice == '3':
         return None
+    
     else:
-        print("Invalid choice, try again and choose 1,2 or 3.")
+        print("Invalid choice, try again and choose 1, 2 or 3.")
+        
         return None
     
     return loader 
 
 
-def data_extractor(loader:str|None) -> pd.DataFrame | None:
+def data_extractor(loader:str | None) -> pd.DataFrame | None:
     """
     Extract data from a file using the specified pandas loader function.
     
@@ -53,37 +55,49 @@ def data_extractor(loader:str|None) -> pd.DataFrame | None:
         print("Exiting to main menu")
         return None
     
-    file_extension: str = loader.strip('read_')
+    file_extension: str = loader.replace("read_", "")
+    
     print(f"Chosen data type is {file_extension}")
     
-    df:pd.DataFrame |None = None
+    df: pd.DataFrame |None = None
     
     while True:
+        
         file_path:str = input("Enter the path of a file to open: ")
             
-        print(f"Chosen function to open the file is{loader}")
-        print(f"chosen path is {file_path}")
+        print(f"Chosen function to open the file is {loader}")
+        print(f"Chosen path is {file_path}")
             
         if not file_path:
             print("No file path given, try again")
             continue
             
         try:
-            df = getattr(pd,loader)(file_path)
-            print(f"File loaded with {len(df)} rows and {len(df.columns)} columns.")
-            print(f"The head is {df.head(2)}")
+            
+            df = getattr(pd, loader)(file_path)
+            
+            print(
+                f"File loaded with {len(df)} rows"
+                f"and {len(df.columns)} columns."
+            )
+            print(f"The head is: \n {df.head(2)}")
+            
             return df    
                 
         except FileNotFoundError:
-            print(f"File not found:{file_path}.")
-            continue    
+            
+            print(f"File not found: {file_path}.")
+            
+            
+            
         except pd.errors.EmptyDataError:
+            
             print(f"File {file_path} is empty.")
-            continue    
+            
+        
+            
         except Exception as e:
+            
             print(f"Error loading file from {file_path}:{e}")
-            continue
+        
     
-
-# loader: str | None = choose_loader()
-# data_extractor(loader)
