@@ -13,9 +13,9 @@ def choose_loader() -> str|None:
     """
     
     print("Choose a type of a file you want load the data from: ")
-    print("Press 1 for .csv file")
-    print("Press 2 for .xls/.xlsx file")
-    print("Press 3 for exit to main menu")
+    print("Press 1 for .csv file.")
+    print("Press 2 for .xls/.xlsx file.")
+    print("Press 3 for exit to main menu.")
     
     user_choice:str = input("Your choice: ")
     
@@ -26,7 +26,7 @@ def choose_loader() -> str|None:
     elif user_choice == '3':
         return None
     else:
-        print("Invalid choice, try again and choose 1,2 or 3")
+        print("Invalid choice, try again and choose 1,2 or 3.")
         return None
     
     return loader 
