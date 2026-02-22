@@ -3,7 +3,7 @@ import pandas as pd
 
 def choose_loader() -> str | None:
     """
-    Prompt user to choose the appropriate data loader for their file type.
+    Prompts user to choose the appropriate data loader for their file type.
     
     Returns:
         str | None: Name of pandas read function ('read_csv' or 'read_excel'),
